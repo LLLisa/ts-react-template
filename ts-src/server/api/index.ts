@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 
 const app = express();
@@ -6,7 +6,16 @@ const app = express();
 app.use('/public', express.static(path.join(__dirname, '../../../public')));
 
 app.get('/', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../../../public/index.html'));
+  try {
+    res.sendFile(path.join(__dirname, '../../../public/index.html'));
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.error(err);
+  res.status(err.status || 500).send(err.message);
 });
 
 export default app;
