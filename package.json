@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "tsc && node build/server",
+    "start": "tsc && node build/server/index.js",
     "start:dev": "nodemon server/index.ts"
   },
   "keywords": [],
