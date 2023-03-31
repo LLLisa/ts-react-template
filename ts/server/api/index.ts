@@ -1,9 +1,14 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 
+import exampleRouter from './example';
+
 const app = express();
 
 app.use('/public', express.static(path.join(__dirname, '../../../public')));
+app.use('/dist', express.static(path.join(__dirname, '../../../dist')));
+
+app.use('/example', exampleRouter);
 
 app.get('/', (req, res, next) => {
   try {
